@@ -2,19 +2,16 @@ import Image from 'next/image';
 import styles from './page.module.css';
 
 async function getData() {
-  const res = await fetch('https://smell-the-roses.onrender.com/plants');
+  const res = await fetch('http:localhost:4000/plants/4598');
 
-  console.log({ res });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  // Recommendation: handle errors
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data');
   }
+  const body = JSON.parse(await res.text());
 
-  return res;
+  console.log({ body });
+
+  return body;
 }
 
 export default async function Home() {
