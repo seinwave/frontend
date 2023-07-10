@@ -3,7 +3,7 @@ import Map from './map';
 
 async function getData() {
   // TODO: rapid refresh of cache, for now -- don't forget to update
-  const res = await fetch('http:localhost:4000/map/39', {
+  const res = await fetch('http:localhost:4000/map/', {
     next: { revalidate: 3 },
   });
 
@@ -12,20 +12,17 @@ async function getData() {
   }
   const body = JSON.parse(await res.text());
 
-  const sector = body.sector;
+  const sectors = body.sectors;
   const plants = body.plants;
 
-  return { sector, plants };
+  return { sectors, plants };
 }
 
 export default async function Home() {
-  const { sector, plants } = await getData();
-
-  console.log(plants[0]);
-
+  const { sectors, plants } = await getData();
   return (
     <main className={styles.main}>
-      <Map sector={sector} plants={plants} />
+      <Map sectors={sectors} plants={plants} />
     </main>
   );
 }
