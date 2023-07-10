@@ -2,20 +2,24 @@ import Image from 'next/image';
 import styles from './page.module.css';
 
 async function getData() {
-  const res = await fetch('http:localhost:4000/plants/4598');
+  // TODO: rapid refresh of cache, for now -- don't forget to update
+  const res = await fetch('http:localhost:4000/map/39', {
+    next: { revalidate: 3 },
+  });
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
   const body = JSON.parse(await res.text());
 
-  console.log({ body });
+  const sector = body.sector;
+  const plants = body.plants;
 
-  return body;
+  return { sector, plants };
 }
 
 export default async function Home() {
-  const data = await getData();
+  const { sector, plants } = await getData();
 
   return (
     <main className={styles.main}>
