@@ -1,7 +1,7 @@
 'use client';
 import styles from './page.module.css';
 import * as d3 from 'd3';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface Sector {
   id: number;
@@ -41,7 +41,7 @@ export default function Map({
   sectors: [Sector];
   plants: [Plant];
 }) {
-  const width = 960;
+  const width = 900;
   const height = 900;
 
   const sectorObjects: SectorObject[] = [];
@@ -57,55 +57,15 @@ export default function Map({
     sectorObjects.push(sectorObject);
   });
 
-  const wholeMapObject = {
-    type: 'FeatureCollection',
-    name: 'whole-garden',
-    crs: {
-      type: 'name',
-      properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' },
-    },
-    features: [
-      {
-        type: 'Feature',
-        properties: { Name: 'whole-garden' },
-        geometry: {
-          type: 'Polygon',
-          coordinates: [
-            [
-              [-73.9651522, 40.6695492],
-              [-73.9655015, 40.6685493],
-              [-73.9655015, 40.6682889],
-              [-73.9653567, 40.6682401],
-              [-73.9648703, 40.6694878],
-              [-73.9651522, 40.6695492],
-            ],
-          ],
-        },
-      },
-    ],
-    geometries: [],
-  };
-
   useEffect(() => {
     const svg = d3
       .select('.wrapper')
       .append('svg')
       .attr('width', width)
       .attr('height', height)
-      .attr('fill', '#ffff')
-      .attr('stroke', 'black');
+      .attr('viewBox', `0 0 ${width} ${height}`);
 
-    const firstTwoCoordinates =
-      wholeMapObject.features[0].geometry.coordinates[0][0];
-
-    const projection = d3
-      .geoMercator()
-      .rotate([...firstTwoCoordinates, 14.2])
-      .fitSize([width, height], wholeMapObject);
-
-    const path = d3.geoPath().projection(projection);
-
-    svg.append('path').datum(wholeMapObject).attr('d', path);
+    const g = svg.append('g').attr('class', 'g');
 
     let allSectors = {
       type: 'FeatureCollection',
@@ -114,58 +74,46 @@ export default function Map({
     };
     const allProjection = d3
       .geoMercator()
-      .rotate([0, 0, 14.2])
+      .rotate([73, -21, 14.2])
       .fitSize([width, height], allSectors);
     const allPath = d3.geoPath().projection(allProjection);
 
     sectorObjects.forEach((sectorObject) => {
-      const bounds = d3.geoBounds(sectorObject);
+      const sectorGroup = g.append('g');
 
-      const width = bounds[1][0] - bounds[0][0];
-      const height = bounds[1][1] - bounds[0][1];
-      const projection = d3
-        .geoMercator()
-        .fitSize([width, height], sectorObject);
+      sectorGroup.append('path').datum(sectorObject).attr('d', allPath);
 
-      const path = d3.geoPath().projection(projection);
+      sectorGroup.attr('fill', 'none').attr('stroke', 'red');
 
-      const group = svg.append('g');
+      plants.forEach((plant) => {
+        const lat: number = plant.latitude;
+        const long: number = plant.longitude;
 
-      group.append('path').datum(sectorObject).attr('d', allPath);
+        const coordinates: [number, number] = [long, lat];
 
-      group.attr('fill', 'none').attr('stroke', 'red');
+        const projectionCoordinates = allProjection(coordinates);
+
+        // don't render the plant if we don't have coordinates
+        if (!projectionCoordinates) return;
+
+        g.append('circle')
+          .attr('cx', projectionCoordinates[0])
+          .attr('cy', projectionCoordinates[1])
+          .attr('r', 2)
+          .attr('fill', 'purple');
+      });
+
+      function zoomed({ transform }: { transform: any }) {
+        g.attr('transform', transform);
+      }
+
+      d3.select('.wrapper').call(d3.zoom().on('zoom', zoomed));
     });
     return () => {
       d3.select('.wrapper').selectAll('svg').remove();
       d3.select('.wrapper').selectAll('g').remove();
     };
   }, []);
-
-  //   useEffect(() => {
-  //     // if has existing svg, remove it
-  //     // TODO: this is a hack, but it works for now
-  //     // TODO: figure out why multiple SVGs are spawning, upon each hot refresh
-  //     d3.select('svg').remove();
-
-  //     plants.forEach((plant) => {
-  //       const lat: number = plant.latitude;
-  //       const long: number = plant.longitude;
-
-  //       const coordinates: [number, number] = [long, lat];
-
-  //       const projectionCoordinates = projection(coordinates);
-
-  //       if (!projectionCoordinates) return;
-
-  //       svg
-  //         .append('circle')
-  //         .attr('cx', projectionCoordinates[0])
-  //         .attr('cy', projectionCoordinates[1])
-  //         .attr('r', 5)
-  //         .attr('fill', 'red');
-  //     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, []);
 
   return <div className={'wrapper'}>MAP</div>;
 }
