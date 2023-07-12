@@ -1,7 +1,6 @@
 'use client';
-import styles from './page.module.css';
 import * as d3 from 'd3';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 interface Sector {
   id: number;
@@ -58,8 +57,8 @@ export default function Map({
     const svg = d3
       .select('.wrapper')
       .append('svg')
-      .attr('height', '100%')
-      .attr('width', '100%')
+      .attr('height', 900)
+      .attr('width', 1200)
       .attr('viewBox', '0 0 900 1200');
 
     const g = svg.append('g').attr('class', 'g');
@@ -94,6 +93,7 @@ export default function Map({
         if (!projectionCoordinates) return;
 
         g.append('circle')
+          .attr('class', 'plant')
           .attr('cx', projectionCoordinates[0])
           .attr('cy', projectionCoordinates[1])
           .attr('r', 2)
