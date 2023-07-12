@@ -41,9 +41,6 @@ export default function Map({
   sectors: [Sector];
   plants: [Plant];
 }) {
-  const width = 900;
-  const height = 900;
-
   const sectorObjects: SectorObject[] = [];
 
   sectors.forEach((sector: Sector) => {
@@ -61,9 +58,9 @@ export default function Map({
     const svg = d3
       .select('.wrapper')
       .append('svg')
-      .attr('width', width)
-      .attr('height', height)
-      .attr('viewBox', `0 0 ${width} ${height}`);
+      .attr('height', '100%')
+      .attr('width', '100%')
+      .attr('viewBox', '0 0 900 1200');
 
     const g = svg.append('g').attr('class', 'g');
 
@@ -75,7 +72,7 @@ export default function Map({
     const allProjection = d3
       .geoMercator()
       .rotate([73, -21, 14.2])
-      .fitSize([width, height], allSectors);
+      .fitSize([900, 1200], allSectors);
     const allPath = d3.geoPath().projection(allProjection);
 
     sectorObjects.forEach((sectorObject) => {
@@ -107,7 +104,9 @@ export default function Map({
         g.attr('transform', transform);
       }
 
-      d3.select('.wrapper').call(d3.zoom().on('zoom', zoomed));
+      d3.select('.wrapper').call(
+        d3.zoom().scaleExtent([1, 5]).on('zoom', zoomed)
+      );
     });
     return () => {
       d3.select('.wrapper').selectAll('svg').remove();
