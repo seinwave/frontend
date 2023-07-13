@@ -1,12 +1,11 @@
 'use client';
 import * as d3 from 'd3';
 import { useEffect } from 'react';
-
 import styled from 'styled-components';
+import InfoPanel from './components/InfoPanel';
 
 const Wrapper = styled.div`
   color: green;
-  font-size: 3rem;
 `;
 
 interface Sector {
@@ -88,6 +87,7 @@ export default function Map({
 
       sectorGroup.attr('fill', 'none').attr('stroke', 'red');
 
+      console.log(plants[0]);
       plants.forEach((plant) => {
         const lat: number = plant.latitude;
         const long: number = plant.longitude;
@@ -121,5 +121,9 @@ export default function Map({
     };
   }, []);
 
-  return <Wrapper className="wrapper">Map!</Wrapper>;
+  return (
+    <Wrapper className="wrapper">
+      <InfoPanel /> Map!
+    </Wrapper>
+  );
 }

@@ -1,5 +1,6 @@
 import styles from './page.module.css';
 import Map from './map';
+import InfoPanel from './components/InfoPanel';
 
 async function getData() {
   // TODO: rapid refresh of cache, for now -- don't forget to update
