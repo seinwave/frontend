@@ -2,6 +2,13 @@
 import * as d3 from 'd3';
 import { useEffect } from 'react';
 
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  color: green;
+  font-size: 3rem;
+`;
+
 interface Sector {
   id: number;
   name: string;
@@ -114,5 +121,5 @@ export default function Map({
     };
   }, []);
 
-  return <div className={'wrapper'}>MAP</div>;
+  return <Wrapper className="wrapper">Map!</Wrapper>;
 }
