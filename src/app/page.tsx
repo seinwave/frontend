@@ -23,7 +23,7 @@ export default async function Home() {
   const { sectors, plants } = await getData();
   return (
     <main className={styles.main}>
-      <InfoPanel />
+      <Map sectors={sectors} plants={plants} />
     </main>
   );
 }

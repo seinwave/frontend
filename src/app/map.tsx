@@ -1,8 +1,8 @@
 'use client';
 import * as d3 from 'd3';
 import { useEffect } from 'react';
-
 import styled from 'styled-components';
+import InfoPanel from './components/InfoPanel';
 
 const Wrapper = styled.div`
   color: green;
@@ -121,5 +121,9 @@ export default function Map({
     };
   }, []);
 
-  return <Wrapper className="wrapper">Map!</Wrapper>;
+  return (
+    <Wrapper className="wrapper">
+      <InfoPanel /> Map!
+    </Wrapper>
+  );
 }

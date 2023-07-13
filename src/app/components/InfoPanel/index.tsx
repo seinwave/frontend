@@ -1,5 +1,5 @@
 'use-client';
-import { HoverCard } from './info-panel.component.tsx';
+import { InfoPanel } from './info-panel.component';
 
-export default HoverCard;
+export default InfoPanel;
 export * as HoverCardStyle from './info-panel.style';
