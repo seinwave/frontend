@@ -1,7 +1,7 @@
 'use-client';
-import { Wrapper, Container } from './hover-card.style';
+import { Wrapper, Container } from './info-panel.style';
 
-export function HoverCard() {
+export function InfoPanel() {
   return (
     <Wrapper>
       <Container>huvvah card baybee</Container>

@@ -1,6 +1,6 @@
 import styles from './page.module.css';
 import Map from './map';
-import HoverCard from './components/HoverCard';
+import InfoPanel from './components/InfoPanel';
 
 async function getData() {
   // TODO: rapid refresh of cache, for now -- don't forget to update
@@ -23,7 +23,7 @@ export default async function Home() {
   const { sectors, plants } = await getData();
   return (
     <main className={styles.main}>
-      <HoverCard />
+      <InfoPanel />
     </main>
   );
 }
