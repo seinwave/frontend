@@ -6,7 +6,6 @@ import InfoPanel from './components/InfoPanel';
 
 const Wrapper = styled.div`
   color: green;
-  font-size: 3rem;
 `;
 
 interface Sector {
@@ -88,6 +87,7 @@ export default function Map({
 
       sectorGroup.attr('fill', 'none').attr('stroke', 'red');
 
+      console.log(plants[0]);
       plants.forEach((plant) => {
         const lat: number = plant.latitude;
         const long: number = plant.longitude;
