@@ -11,7 +11,6 @@ export type Props = PropsWithChildren<{
   maxWidth?: string;
   padding?: Spacing;
   width?: string;
-  withShimmer?: boolean;
 }>;
 
 export const Skeleton: FC<Props> = ({
