@@ -1,11 +1,24 @@
 'use client';
 import * as d3 from 'd3';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import InfoPanel from './components/InfoPanel';
 
 const Wrapper = styled.div`
   color: green;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 3rem;
+`;
+
+const Container = styled.div`
+  width: 45vw;
+`;
+
+const MapContainer = styled(Container)`
+  border: solid 1px blue;
+  overflow: hidden;
 `;
 
 interface Sector {
@@ -15,7 +28,7 @@ interface Sector {
   geojson_string: string;
 }
 
-interface Plant {
+export interface Plant {
   id: number;
   name: string;
   sector_id: number;
@@ -46,6 +59,8 @@ export default function Map({
   sectors: [Sector];
   plants: [Plant];
 }) {
+  const [plant, setPlant] = useState<Plant | null>(null);
+
   const sectorObjects: SectorObject[] = [];
 
   sectors.forEach((sector: Sector) => {
@@ -61,11 +76,11 @@ export default function Map({
 
   useEffect(() => {
     const svg = d3
-      .select('.wrapper')
+      .select('.map-container')
       .append('svg')
-      .attr('height', 900)
-      .attr('width', 1200)
-      .attr('viewBox', '0 0 900 1200');
+      .attr('height', 1200)
+      .attr('width', 500)
+      .attr('viewBox', '0 0 500 1200');
 
     const g = svg.append('g').attr('class', 'g');
 
@@ -87,7 +102,6 @@ export default function Map({
 
       sectorGroup.attr('fill', 'none').attr('stroke', 'red');
 
-      console.log(plants[0]);
       plants.forEach((plant) => {
         const lat: number = plant.latitude;
         const long: number = plant.longitude;
@@ -101,11 +115,17 @@ export default function Map({
 
         g.append('circle')
           .attr('class', 'plant')
+          .attr('id', plant.id)
           .attr('cx', projectionCoordinates[0])
           .attr('cy', projectionCoordinates[1])
           .attr('r', 2)
+          .on('click', () => {
+            setPlant(plant);
+          })
           .attr('fill', 'purple');
       });
+
+      const circle = d3.select(`#${plant?.id}`);
 
       function zoomed({ transform }: { transform: any }) {
         g.attr('transform', transform);
@@ -121,9 +141,16 @@ export default function Map({
     };
   }, []);
 
+  const shouldRenderInfoPanel = plant !== null;
+
+  console.log({ plant });
+
   return (
     <Wrapper className="wrapper">
-      <InfoPanel /> Map!
+      <Container className="container">
+        {plant && <InfoPanel plant={plant} />}
+      </Container>
+      <MapContainer className="map-container"></MapContainer>
     </Wrapper>
   );
 }

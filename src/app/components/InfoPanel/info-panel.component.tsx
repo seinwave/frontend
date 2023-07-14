@@ -13,8 +13,9 @@ import {
   InfoContainer,
   SectorList,
 } from './info-panel.style';
+import type { Plant } from '@/app/map';
 
-export function InfoPanel() {
+export function InfoPanel({ plant }: { plant: Plant }) {
   return (
     <Wrapper>
       <Container>
