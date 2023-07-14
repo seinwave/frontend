@@ -5,7 +5,6 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 5rem;
 `;
 
 export const Container = styled.div`
@@ -15,16 +14,19 @@ export const Container = styled.div`
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
 `;
 
 export const PictureContainer = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 export const Picture = styled.img``;
 
 export const InfoContainer = styled.div`
   padding: 1rem;
+  max-width: 70%;
   display: flex;
   flex-direction: column;
 `;
