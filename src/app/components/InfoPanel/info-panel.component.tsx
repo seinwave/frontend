@@ -26,51 +26,62 @@ export function InfoPanel({ plant }: { plant: Plant }) {
   );
 
   if (error) return <div>Failed to load</div>;
-  if (!data)
+  if (data)
     return (
       <Wrapper>
         <Container>
-          <PictureContainer></PictureContainer>
+          <PictureContainer>
+            <Skeleton />
+          </PictureContainer>
           <InfoContainer>
-            <NameRow></NameRow>
-            <GroupCategoryRow></GroupCategoryRow>
-            <BreedingRow></BreedingRow>
+            <NameRow>
+              <Skeleton />
+            </NameRow>
+            <GroupCategoryRow>
+              <Skeleton />
+            </GroupCategoryRow>
+            <BreedingRow>
+              <Skeleton />
+            </BreedingRow>
             <LocationRow>
-              <SectorList> </SectorList>
+              <SectorList>
+                <Skeleton />
+              </SectorList>
             </LocationRow>
-            <ShoppingRow>Link to a rose shopping website</ShoppingRow>
+            <ShoppingRow>
+              <Skeleton />
+            </ShoppingRow>
           </InfoContainer>
         </Container>
       </Wrapper>
     );
 
-  const { name, group, category, breeder, year, sector } = data;
+  // const { name, group, category, breeder, year, sector } = data;
 
-  return (
-    <Wrapper>
-      <Container>
-        <PictureContainer>
-          <Picture src="https://via.placeholder.com/400x200" />
-        </PictureContainer>
-        <Skeleton />
-        <InfoContainer>
-          <NameRow>
-            <Name>{name}</Name>
-          </NameRow>
-          <GroupCategoryRow>
-            <div>{group}</div>
-            <div>{category}</div>
-          </GroupCategoryRow>
-          <BreedingRow>
-            {breeder} - {year}{' '}
-          </BreedingRow>
-          <LocationRow>
-            <div># in garden -- </div>
-            <SectorList> {sector}</SectorList>
-          </LocationRow>
-          <ShoppingRow>Link to a rose shopping website</ShoppingRow>
-        </InfoContainer>
-      </Container>
-    </Wrapper>
-  );
+  // return (
+  //   <Wrapper>
+  //     <Container>
+  //       <PictureContainer>
+  //         <Picture src="https://via.placeholder.com/400x200" />
+  //       </PictureContainer>
+  //       <InfoContainer>
+  //         <NameRow>
+  //           <Name>{name}</Name>
+  //         </NameRow>
+  //         <GroupCategoryRow>
+  //           <div>{group}</div>
+  //           <div>{category}</div>
+  //         </GroupCategoryRow>
+  //         <BreedingRow>
+  //           {breeder} - {year}{' '}
+  //         </BreedingRow>
+  //         <LocationRow>
+  //           <div># in garden -- </div>
+  //           <SectorList> {sector}</SectorList>
+  //         </LocationRow>
+  //         <ShoppingRow>Link to a rose shopping website</ShoppingRow>
+  //       </InfoContainer>
+  //     </Container>
+  //   </Wrapper>
+  // );
 }

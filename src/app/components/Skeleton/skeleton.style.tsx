@@ -20,6 +20,7 @@ export const SkeletonLoader = styled.div`
   border-radius: 4px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   &::before {
     content: '';
@@ -32,9 +33,9 @@ export const SkeletonLoader = styled.div`
     background: linear-gradient(
       to right,
       transparent 0%,
-      hotpink 50%,
+      #f7f7f7 50%,
       transparent 100%
     );
-    animation: ${loadingAnimation} 1.2s ease-in-out infinite;
+    animation: ${loadingAnimation} 0.7s ease-in-out infinite;
   }
 `;
