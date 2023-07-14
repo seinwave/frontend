@@ -14,7 +14,7 @@ export const Container = styled.div`
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
+  width: 500px;
 `;
 
 export const PictureContainer = styled.div`
@@ -25,10 +25,11 @@ export const PictureContainer = styled.div`
 export const Picture = styled.img``;
 
 export const InfoContainer = styled.div`
-  padding: 1rem;
+  padding: 0.5rem;
   max-width: 70%;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 `;
 
 export const NameRow = styled.div``;

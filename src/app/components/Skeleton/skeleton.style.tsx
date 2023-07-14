@@ -1,5 +1,6 @@
 'use-client';
 import styled, { keyframes } from 'styled-components';
+import { Spacing } from '@/types/styles';
 
 const loadingAnimation = keyframes`
     from {
@@ -12,12 +13,20 @@ const loadingAnimation = keyframes`
 
 export const Wrapper = styled.div``;
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+`;
 
-export const SkeletonLoader = styled.div`
-  width: 200px;
-  height: 20px;
+export const StyledSkeleton = styled.div<{
+  height: string;
+  margin: Spacing;
+  maxHeight?: string;
+  maxWidth?: string;
+  padding: Spacing;
+  width: string;
+}>`
   border-radius: 4px;
+  height: 20px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
