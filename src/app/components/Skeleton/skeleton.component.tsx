@@ -1,6 +1,6 @@
 'use-client';
 import { FC, PropsWithChildren } from 'react';
-import { Container, Wrapper, StyledSkeleton } from './skeleton.style';
+import { StyledSkeleton } from './skeleton.style';
 import { Spacing } from '@/types/styles';
 
 export type Props = PropsWithChildren<{
@@ -25,19 +25,15 @@ export const Skeleton: FC<Props> = ({
   ...rest
 }) => {
   return (
-    <Wrapper>
-      <Container>
-        <StyledSkeleton
-          className={className}
-          height={height}
-          margin={margin}
-          maxWidth={maxWidth}
-          maxHeight={maxHeight}
-          padding={padding}
-          width={width}
-          {...rest}
-        ></StyledSkeleton>
-      </Container>
-    </Wrapper>
+    <StyledSkeleton
+      className={className}
+      height={height}
+      margin={margin}
+      maxWidth={maxWidth}
+      maxHeight={maxHeight}
+      padding={padding}
+      width={width}
+      {...rest}
+    ></StyledSkeleton>
   );
 };

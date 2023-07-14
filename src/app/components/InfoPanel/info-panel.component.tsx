@@ -30,9 +30,8 @@ export function InfoPanel({ plant }: { plant: Plant }) {
     return (
       <Wrapper>
         <Container>
-          <PictureContainer>
-            <Skeleton />
-          </PictureContainer>
+          <Skeleton height="200px" />
+
           <InfoContainer>
             <NameRow>
               <Skeleton />

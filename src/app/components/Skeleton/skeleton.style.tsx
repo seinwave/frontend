@@ -11,12 +11,6 @@ const loadingAnimation = keyframes`
     }
 `;
 
-export const Wrapper = styled.div``;
-
-export const Container = styled.div`
-  width: 100%;
-`;
-
 export const StyledSkeleton = styled.div<{
   height: string;
   margin: Spacing;
@@ -26,7 +20,7 @@ export const StyledSkeleton = styled.div<{
   width: string;
 }>`
   border-radius: 4px;
-  height: 20px;
+  height: ${({ height }) => height};
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
