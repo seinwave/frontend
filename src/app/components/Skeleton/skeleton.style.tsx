@@ -18,8 +18,9 @@ export const StyledSkeleton = styled.div<{
   maxWidth?: string;
   padding: Spacing;
   width: string;
+  borderRadius: string;
 }>`
-  border-radius: 4px;
+  border-radius: ${({ borderRadius }) => borderRadius};
   height: ${({ height }) => height};
   position: relative;
   overflow: hidden;
@@ -36,7 +37,7 @@ export const StyledSkeleton = styled.div<{
     background: linear-gradient(
       to right,
       transparent 0%,
-      #f7f7f7 50%,
+      hotpink 50%,
       transparent 100%
     );
     animation: ${loadingAnimation} 0.7s ease-in-out infinite;

@@ -11,6 +11,7 @@ export type Props = PropsWithChildren<{
   maxWidth?: string;
   padding?: Spacing;
   width?: string;
+  borderRadius?: string;
 }>;
 
 export const Skeleton: FC<Props> = ({
@@ -21,6 +22,7 @@ export const Skeleton: FC<Props> = ({
   maxHeight,
   padding = {},
   width = '150px',
+  borderRadius = '4px',
   ...rest
 }) => {
   return (
@@ -32,6 +34,7 @@ export const Skeleton: FC<Props> = ({
       maxHeight={maxHeight}
       padding={padding}
       width={width}
+      borderRadius={borderRadius}
       {...rest}
     ></StyledSkeleton>
   );
