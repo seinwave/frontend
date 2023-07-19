@@ -37,7 +37,7 @@ export const StyledSkeleton = styled.div<{
     background: linear-gradient(
       to right,
       transparent 0%,
-      hotpink 50%,
+      hsl(0, 0%, 94%) 25%,
       transparent 100%
     );
     animation: ${loadingAnimation} 0.7s ease-in-out infinite;

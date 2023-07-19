@@ -19,10 +19,14 @@ export const Container = styled.div`
 
 export const PictureContainer = styled.div`
   display: flex;
+  max-height: 450px;
   width: 100%;
 `;
 
-export const Picture = styled.img``;
+export const Picture = styled.img`
+  width: 100%;
+  object-fit: cover;
+`;
 
 export const InfoContainer = styled.div`
   padding: 0.5rem;

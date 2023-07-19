@@ -26,7 +26,7 @@ export function InfoPanel({ plant }: { plant: Plant }) {
   );
 
   if (error) return <div>Failed to load</div>;
-  if (data)
+  if (!data)
     return (
       <Wrapper>
         <Container>
@@ -55,32 +55,32 @@ export function InfoPanel({ plant }: { plant: Plant }) {
       </Wrapper>
     );
 
-  // const { name, group, category, breeder, year, sector } = data;
+  const { name, group, category, breeder, year, sector } = data;
 
-  // return (
-  //   <Wrapper>
-  //     <Container>
-  //       <PictureContainer>
-  //         <Picture src="https://via.placeholder.com/400x200" />
-  //       </PictureContainer>
-  //       <InfoContainer>
-  //         <NameRow>
-  //           <Name>{name}</Name>
-  //         </NameRow>
-  //         <GroupCategoryRow>
-  //           <div>{group}</div>
-  //           <div>{category}</div>
-  //         </GroupCategoryRow>
-  //         <BreedingRow>
-  //           {breeder} - {year}{' '}
-  //         </BreedingRow>
-  //         <LocationRow>
-  //           <div># in garden -- </div>
-  //           <SectorList> {sector}</SectorList>
-  //         </LocationRow>
-  //         <ShoppingRow>Link to a rose shopping website</ShoppingRow>
-  //       </InfoContainer>
-  //     </Container>
-  //   </Wrapper>
-  // );
+  return (
+    <Wrapper>
+      <Container>
+        <PictureContainer>
+          <Picture src="https://via.placeholder.com/900x500" />
+        </PictureContainer>
+        <InfoContainer>
+          <NameRow>
+            <Name>{name}</Name>
+          </NameRow>
+          <GroupCategoryRow>
+            <div>{group}</div>
+            <div>{category}</div>
+          </GroupCategoryRow>
+          <BreedingRow>
+            {breeder} - {year}{' '}
+          </BreedingRow>
+          <LocationRow>
+            <div># in garden -- </div>
+            <SectorList> {sector}</SectorList>
+          </LocationRow>
+          <ShoppingRow>Link to a rose shopping website</ShoppingRow>
+        </InfoContainer>
+      </Container>
+    </Wrapper>
+  );
 }

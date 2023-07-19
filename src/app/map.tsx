@@ -128,6 +128,8 @@ export default function Map({
       const circle = d3.select(`#${plant?.id}`);
 
       function zoomed({ transform }: { transform: any }) {
+        //TODO: how much to show or not?
+        //TODO: can that be handled with the `tile` library? (vs zoom)
         g.attr('transform', transform);
       }
 
@@ -140,10 +142,6 @@ export default function Map({
       d3.select('.wrapper').selectAll('g').remove();
     };
   }, []);
-
-  const shouldRenderInfoPanel = plant !== null;
-
-  console.log({ plant });
 
   return (
     <Wrapper className="wrapper">
