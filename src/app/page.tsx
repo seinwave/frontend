@@ -1,5 +1,5 @@
 import styles from './page.module.css';
-import Map from './map';
+import Map from './components/Map';
 import InfoPanel from './components/InfoPanel';
 
 async function getData() {

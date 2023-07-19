@@ -1,58 +1,11 @@
 'use client';
 import * as d3 from 'd3';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import InfoPanel from './components/InfoPanel';
+import InfoPanel from '../InfoPanel';
+import { Wrapper, Container, MapContainer } from './map.style';
+import { type Sector, type Plant, type SectorObject } from '@/types/models';
 
-const Wrapper = styled.div`
-  color: green;
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  padding: 3rem;
-`;
-
-const Container = styled.div`
-  width: 45vw;
-`;
-
-const MapContainer = styled(Container)`
-  border: solid 1px blue;
-  overflow: hidden;
-`;
-
-interface Sector {
-  id: number;
-  name: string;
-  coordinates: [number[], number[], number[], number[]];
-  geojson_string: string;
-}
-
-export interface Plant {
-  id: number;
-  name: string;
-  sector_id: number;
-  cultivar_id: number;
-  latitude: number;
-  longitude: number;
-  form: number;
-  status?: number;
-  is_deleted?: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
-interface SectorObject {
-  type: string;
-  properties: { name: string };
-  geometry: {
-    type: string;
-    coordinates: [number[], number[], number[], number[]];
-  };
-  geometries: Array<any>;
-}
-
-export default function Map({
+export function Map({
   sectors,
   plants,
 }: {
