@@ -15,6 +15,7 @@ import {
 } from './info-panel.style';
 import useSWR from 'swr';
 import type { Plant } from '@/app/map';
+import { Skeleton } from '../Skeleton/skeleton.component';
 
 const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json());
 
@@ -29,15 +30,26 @@ export function InfoPanel({ plant }: { plant: Plant }) {
     return (
       <Wrapper>
         <Container>
-          <PictureContainer></PictureContainer>
+          <Skeleton height="200px" />
+
           <InfoContainer>
-            <NameRow></NameRow>
-            <GroupCategoryRow></GroupCategoryRow>
-            <BreedingRow></BreedingRow>
+            <NameRow>
+              <Skeleton />
+            </NameRow>
+            <GroupCategoryRow>
+              <Skeleton />
+            </GroupCategoryRow>
+            <BreedingRow>
+              <Skeleton />
+            </BreedingRow>
             <LocationRow>
-              <SectorList> </SectorList>
+              <SectorList>
+                <Skeleton />
+              </SectorList>
             </LocationRow>
-            <ShoppingRow>Link to a rose shopping website</ShoppingRow>
+            <ShoppingRow>
+              <Skeleton />
+            </ShoppingRow>
           </InfoContainer>
         </Container>
       </Wrapper>
@@ -49,7 +61,7 @@ export function InfoPanel({ plant }: { plant: Plant }) {
     <Wrapper>
       <Container>
         <PictureContainer>
-          <Picture src="https://via.placeholder.com/400x200" />
+          <Picture src="https://via.placeholder.com/900x500" />
         </PictureContainer>
         <InfoContainer>
           <NameRow>
